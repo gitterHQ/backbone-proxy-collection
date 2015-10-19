@@ -1,0 +1,22 @@
+{
+  "name": "backbone-proxy-collection",
+  "version": "1.0.0",
+  "description": "A Proxy COllection for Backbone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:build": "browserify ./test/specs/*.js > ./test/fixtures/build/runner.js",
+    "test:build:watch": "watchify ./test/specs/*.js -o ./test/fixtures/build/runner.js",
+    "test:server": "http-server ./test/fixtures -p 9999",
+    "test:watch": "npm run test:server & npm run test:build:watch"
+  },
+  "author": "Gitter",
+  "license": "MIT",
+  "devDependencies": {
+    "backbone": "^1.2.3",
+    "browserify": "^11.2.0",
+    "http-server": "^0.8.5",
+    "lodash": "^3.10.1",
+    "watchify": "^3.4.0"
+  }
+}
