@@ -88,6 +88,66 @@ ProxyCollection.prototype = _.extend({}, Backbone.Events, {
     return this.collection.slice.apply(this.collection, arguments);
   },
 
+  get: function() {
+    return this.collection.get.apply(this.collection, arguments);
+  },
+
+  where: function() {
+    return this.collection.where.apply(this.collection, arguments);
+  },
+
+  findWhere: function() {
+    return this.collection.findWhere.apply(this.collection, arguments);
+  },
+
+  fetch: function() {
+    return this.collection.fetch.apply(this.collection, arguments);
+  },
+
+  create: function() {
+    return this.collection.create.apply(this.collection, arguments);
+  },
+
+  forEach: function() {
+    return this.collection.forEach.apply(this.collection, arguments);
+  },
+
+  each: function() {
+    return this.collection.each.apply(this.collection, arguments);
+  },
+
+  map: function() {
+    return this.collection.map.apply(this.collection, arguments);
+  },
+
+  reduce: function() {
+    this.collection.reduce.apply(this.collection, arguments);
+  },
+
+  foldl: function() {
+    return this.collection.fodl.apply(this.collection, arguments);
+  },
+
+  foldr: function() {
+    return this.collection.fodr.apply(this.collection, arguments);
+  },
+
+  inject: function() {
+    return this.collection.inject.apply(this.collection, arguments);
+  },
+
+  reduceRight: function() {
+    return this.collection.reduceRight.apply(this.collection, arguments);
+  },
+
+  find: function() {
+    this.collection.find.apply(this.collection, arguments);
+  },
+
+  detect: function() {
+    this.collection.detect.apply(this.collection, arguments);
+  },
+
   _onCollectionEvent: function() {
     this._syncWithCollection();
     this.trigger.apply(this, arguments);
