@@ -14,8 +14,11 @@ function ProxyCollection(attrs, options) {
 }
 
 ProxyCollection.prototype = _.extend({}, Backbone.Events, {
+
+  initialize: function() {},
+
   add: function(models, options) {
-    this.collection.add(models, options);
+    return this.collection.add(models, options);
   },
 
   pluck: function() {
@@ -27,8 +30,7 @@ ProxyCollection.prototype = _.extend({}, Backbone.Events, {
   },
 
   parse: function() {
-    this.collection.parse.apply(this.collection, arguments);
-    this._syncWithCollection();
+    return this.collection.parse.apply(this.collection, arguments);
   },
 
   at: function(index) {
@@ -42,8 +44,48 @@ ProxyCollection.prototype = _.extend({}, Backbone.Events, {
     });
   },
 
+  remove: function(model) {
+    return this.collection.remove.apply(this.collection, arguments);
+  },
+
   destroy: function() {
     this.stopListening(this.collection, 'all', this._onCollectionEvent, this);
+  },
+
+  toJSON: function() {
+    return this.collection.toJSON();
+  },
+
+  sync: function() {
+    return this.collection.sync.apply(this.collection, arguments);
+  },
+
+  set: function() {
+    return this.collection.set.apply(this.collection, arguments);
+  },
+
+  reset: function() {
+    return this.collection.reset();
+  },
+
+  push: function() {
+    return this.collection.push.apply(this.collection, arguments);
+  },
+
+  pop: function() {
+    return this.collection.pop.apply(this.collection, arguments);
+  },
+
+  unshift: function() {
+    return this.collection.unshift.apply(this.collection, arguments);
+  },
+
+  shift: function() {
+    return this.collection.shift.apply(this.collection, arguments);
+  },
+
+  slice: function() {
+    return this.collection.slice.apply(this.collection, arguments);
   },
 
   _onCollectionEvent: function() {
@@ -54,6 +96,7 @@ ProxyCollection.prototype = _.extend({}, Backbone.Events, {
   _syncWithCollection: function() {
     this.length = this.collection.length;
     this.models = this.collection.models;
+    this.model  = this.collection.model;
   },
 });
 
