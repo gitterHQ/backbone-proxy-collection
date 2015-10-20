@@ -12,7 +12,7 @@ beforeEach(function() {
 });
 
 describe('ProxyCollection.destroy()', function() {
-  it.only('Should remove all event listeners', function(done) {
+  it('Should remove all event listeners', function(done) {
 
     proxyCollection.on('all', function() {
       assert.ok(false);
