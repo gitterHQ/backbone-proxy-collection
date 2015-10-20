@@ -10,8 +10,7 @@ function ProxyCollection(attrs, options) {
 
   this._syncWithCollection();
 
-  this.listenTo(this.collection, 'add', this._onCollectionAdd, this);
-  this.listenTo(this.collection, 'sort', this._onCollectionSort, this);
+  this.listenTo(this.collection, 'all', this._onCollectionEvent, this);
 }
 
 ProxyCollection.prototype = _.extend({}, Backbone.Events, {
@@ -32,25 +31,24 @@ ProxyCollection.prototype = _.extend({}, Backbone.Events, {
     this._syncWithCollection();
   },
 
-  at: function (index){
+  at: function(index) {
     return this.collection.at(index);
   },
 
-  clone: function (){
+  clone: function() {
     //TODO: what about other attributes passed to ProxyCollection?
     return new ProxyCollection({
-      collection: this.collection.clone()
+      collection: this.collection.clone(),
     });
   },
 
-  _onCollectionAdd: function(models, collection, options) {
-    this._syncWithCollection();
-    this.trigger('add', models, this, options);
+  destroy: function() {
+    this.stopListening(this.collection, 'all', this._onCollectionEvent, this);
   },
 
-  _onCollectionSort: function(collection, options) {
+  _onCollectionEvent: function() {
     this._syncWithCollection();
-    this.trigger('sort', collection, options);
+    this.trigger.apply(this, arguments);
   },
 
   _syncWithCollection: function() {
