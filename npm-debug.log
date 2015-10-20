@@ -2,37 +2,26 @@
 1 verbose cli [ 'node',
 1 verbose cli   '/home/pastey/.nvm/v0.10.40/bin/npm',
 1 verbose cli   'run',
-1 verbose cli   'test:server' ]
+1 verbose cli   'test:watc' ]
 2 info using npm@2.14.7
 3 info using node@v0.10.40
-4 verbose run-script [ 'pretest:server', 'test:server', 'posttest:server' ]
-5 info pretest:server backbone-proxy-collection@1.0.0
-6 info test:server backbone-proxy-collection@1.0.0
-7 verbose unsafe-perm in lifecycle true
-8 info backbone-proxy-collection@1.0.0 Failed to exec test:server script
-9 verbose stack Error: backbone-proxy-collection@1.0.0 test:server: `http-server ./test/fixtures -p 9090`
-9 verbose stack Exit status 8
-9 verbose stack     at EventEmitter.<anonymous> (/home/pastey/.nvm/v0.10.40/lib/node_modules/npm/lib/utils/lifecycle.js:214:16)
-9 verbose stack     at EventEmitter.emit (events.js:98:17)
-9 verbose stack     at ChildProcess.<anonymous> (/home/pastey/.nvm/v0.10.40/lib/node_modules/npm/lib/utils/spawn.js:24:14)
-9 verbose stack     at ChildProcess.emit (events.js:98:17)
-9 verbose stack     at maybeClose (child_process.js:766:16)
-9 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:833:5)
-10 verbose pkgid backbone-proxy-collection@1.0.0
-11 verbose cwd /home/pastey/web/proxy-collection
-12 error Linux 3.13.0-65-generic
-13 error argv "node" "/home/pastey/.nvm/v0.10.40/bin/npm" "run" "test:server"
-14 error node v0.10.40
-15 error npm  v2.14.7
-16 error code ELIFECYCLE
-17 error backbone-proxy-collection@1.0.0 test:server: `http-server ./test/fixtures -p 9090`
-17 error Exit status 8
-18 error Failed at the backbone-proxy-collection@1.0.0 test:server script 'http-server ./test/fixtures -p 9090'.
-18 error This is most likely a problem with the backbone-proxy-collection package,
-18 error not with npm itself.
-18 error Tell the author that this fails on your system:
-18 error     http-server ./test/fixtures -p 9090
-18 error You can get their info via:
-18 error     npm owner ls backbone-proxy-collection
-18 error There is likely additional logging output above.
-19 verbose exit [ 1, true ]
+4 verbose stack Error: missing script: test:watc
+4 verbose stack     at run (/home/pastey/.nvm/v0.10.40/lib/node_modules/npm/lib/run-script.js:142:19)
+4 verbose stack     at /home/pastey/.nvm/v0.10.40/lib/node_modules/npm/lib/run-script.js:58:5
+4 verbose stack     at /home/pastey/.nvm/v0.10.40/lib/node_modules/npm/node_modules/read-package-json/read-json.js:345:5
+4 verbose stack     at checkBinReferences_ (/home/pastey/.nvm/v0.10.40/lib/node_modules/npm/node_modules/read-package-json/read-json.js:309:45)
+4 verbose stack     at final (/home/pastey/.nvm/v0.10.40/lib/node_modules/npm/node_modules/read-package-json/read-json.js:343:3)
+4 verbose stack     at then (/home/pastey/.nvm/v0.10.40/lib/node_modules/npm/node_modules/read-package-json/read-json.js:113:5)
+4 verbose stack     at /home/pastey/.nvm/v0.10.40/lib/node_modules/npm/node_modules/read-package-json/read-json.js:300:12
+4 verbose stack     at /home/pastey/.nvm/v0.10.40/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:76:16
+4 verbose stack     at fs.js:272:14
+4 verbose stack     at /home/pastey/.nvm/v0.10.40/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:42:10
+5 verbose cwd /home/pastey/web/proxy-collection
+6 error Linux 3.13.0-65-generic
+7 error argv "node" "/home/pastey/.nvm/v0.10.40/bin/npm" "run" "test:watc"
+8 error node v0.10.40
+9 error npm  v2.14.7
+10 error missing script: test:watc
+11 error If you need help, you may report this error at:
+11 error     <https://github.com/npm/npm/issues>
+12 verbose exit [ 1, true ]
