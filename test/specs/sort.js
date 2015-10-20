@@ -18,7 +18,7 @@ beforeEach(function() {
   });
 });
 
-describe('Proxy Collection.sort()', function() {
+describe('ProxyCollection.sort()', function() {
   it('Should emit a sort event when sort is called', function(done) {
     proxyCollection.on('sort', function() {
       assert.ok(true);
@@ -38,7 +38,6 @@ describe('Proxy Collection.sort()', function() {
 
     //add comparator
     collection.comparator = function(a, b) {
-      console.log('compare', a.id, b.id);
       return a.id < b.id ? -1 : 1;
     };
 

@@ -32,6 +32,17 @@ ProxyCollection.prototype = _.extend({}, Backbone.Events, {
     this._syncWithCollection();
   },
 
+  at: function (index){
+    return this.collection.at(index);
+  },
+
+  clone: function (){
+    //TODO: what about other attributes passed to ProxyCollection?
+    return new ProxyCollection({
+      collection: this.collection.clone()
+    });
+  },
+
   _onCollectionAdd: function(models, collection, options) {
     this._syncWithCollection();
     this.trigger('add', models, this, options);

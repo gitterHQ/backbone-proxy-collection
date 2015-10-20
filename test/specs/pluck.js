@@ -2,7 +2,7 @@ var assert          = require('assert');
 var Backbone        = require('backbone');
 var ProxyCollection = require('../../index.js');
 
-describe('Proxy Collection.pluck()', function() {
+describe('ProxyCollection.pluck()', function() {
   it('Should pluck attributes', function() {
 
     var collection = new Backbone.Collection([

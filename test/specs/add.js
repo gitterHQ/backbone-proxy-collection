@@ -14,7 +14,7 @@ beforeEach(function() {
   });
 });
 
-describe('Adding models to a proxy collection', function() {
+describe('ProxyCollection.add()', function() {
 
   it('Should emit an add event when a model is added', function(done) {
     proxyCollection.on('add', function() {
