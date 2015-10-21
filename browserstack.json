@@ -1,0 +1,12 @@
+{
+    "username": "BROWSERSTACK_USERNAME",
+    "key": "BROWSERSTACK_KEY",
+    "test_path": "./test/fixtures/index.html",
+    "test_framework": "mocha",
+    "browsers": [
+      "chrome_latest",
+      "firefox_latest",
+      "safari_latest",
+      "ie_latest"
+    ]
+}
