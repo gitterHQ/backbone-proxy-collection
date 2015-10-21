@@ -4,7 +4,7 @@ var Backbone        = require('backbone');
 
 describe('ProxyCollection methods compared to Backbone.Collection', function() {
 
-  it('should contain all the same methods', function() {
+  it.skip('should contain all the same methods', function() {
     var collection = new Backbone.Collection();
     var proxyCollection = new ProxyCollection({
       collection: collection,

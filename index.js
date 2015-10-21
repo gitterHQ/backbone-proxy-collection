@@ -3,6 +3,25 @@
 var Backbone = require('backbone');
 var _        = require('underscore');
 
+var methods = [
+  'add',
+  'at',
+  'findWhere',
+  'get',
+  'parse',
+  'pluck',
+  'pop',
+  'push',
+  'remove',
+  'reset',
+  'shift',
+  'slice',
+  'sort',
+  'toJSON',
+  'unshift',
+  'where'
+];
+
 function ProxyCollection(attrs, options) {
   attrs = (attrs || {});
   attrs.collection = (attrs.collection || new Backbone.Collection());
@@ -46,18 +65,11 @@ ProxyCollection.prototype = _.extend({}, Backbone.Events, {
 
   _bindToCollection: function() {
     var collection = this.collection;
-    for (var key in collection) {
-      //don't copy private methods
-      if (/^_/.test(key)) continue;
-
-      //if we already have a method move on
-      if (typeof this[key] != 'undefined') continue;
-
-      //only copy methods as they are the only things that can bind
-      if (_.isFunction(collection[key])) {
-        this[key] = this.collection[key].bind(this.collection);
-      }
-    }
+    var self = this;
+    methods.forEach(function(key){
+      self[key] = null;
+      self[key] = collection[key].bind(collection);
+    });
 
     //listen to every event
     this.listenTo(collection, 'all', this._onCollectionEvent, this);
