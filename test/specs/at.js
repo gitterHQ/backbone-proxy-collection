@@ -33,7 +33,6 @@ describe('ProxyCollection.at()', function() {
 
   it('Should return the right member of the collection after switchCollectoin is called', function() {
     proxyCollection.switchCollection(secondaryCollection);
-    console.log(proxyCollection.at(0).toJSON(), proxyCollection.collection);
     assert.deepEqual('d', proxyCollection.at(0).get('label'));
     assert.deepEqual('e', proxyCollection.at(1).get('label'));
   });

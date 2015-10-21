@@ -3,6 +3,7 @@ var ProxyCollection = require('../../index.js');
 var Backbone        = require('backbone');
 
 describe('ProxyCollection.clone()', function() {
+
   it('should return a clone Proxy collection', function() {
 
     var compare    = function(model) { return model.id; };
@@ -20,4 +21,5 @@ describe('ProxyCollection.clone()', function() {
     assert.equal('b', proxyCollection.at(1).get('label'));
     assert.strictEqual(proxyCollection.collection.comparator, compare);
   });
+
 });
