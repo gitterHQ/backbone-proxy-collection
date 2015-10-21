@@ -23,7 +23,14 @@ ProxyCollection.prototype = _.extend({}, Backbone.Events, {
   },
 
   destroy: function() {
-    this.stopListening(this.collection, 'all', this._onCollectionEvent, this);
+    this._unbind();
+  },
+
+  switchCollection: function (collection){
+    this._unbind();
+    this.collection = collection;
+    this._bindToCollection();
+    this._syncWithCollection();
   },
 
   _onCollectionEvent: function() {
@@ -54,6 +61,10 @@ ProxyCollection.prototype = _.extend({}, Backbone.Events, {
 
     //listen to every event
     this.listenTo(collection, 'all', this._onCollectionEvent, this);
+  },
+
+  _unbind: function (){
+    this.stopListening(this.collection, 'all', this._onCollectionEvent, this);
   },
 });
 

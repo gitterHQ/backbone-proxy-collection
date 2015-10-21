@@ -38,4 +38,17 @@ describe('ProxyCollection.add()', function() {
     primaryCollection.add({});
   });
 
+  it('Should emit an event when it\'s collection has been switched', function(){
+    proxyCollection.on('add', function(){
+      assert.ok(true);
+      assert.notEqual(proxyCollection.length, primaryCollection.length,
+                      'The length attribute does not represent the old collection');
+      assert.equal(proxyCollection.length, secondaryCollection.length,
+                   'The length attribute represents the new collection');
+    });
+
+    proxyCollection.switchCollection(secondaryCollection);
+    secondaryCollection.add({ id: 1 });
+  });
+
 });
