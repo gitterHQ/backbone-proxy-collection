@@ -10,6 +10,9 @@
     "test:server": "http-server ./test/fixtures -p 9999",
     "test:watch": "npm run test:server & npm run test:build:watch"
   },
+  "publishConfig": {
+    "registry": "http://beta-internal:4873"
+  },
   "author": "Gitter",
   "license": "MIT",
   "devDependencies": {
