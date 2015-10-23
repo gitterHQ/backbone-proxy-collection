@@ -3,29 +3,23 @@
 var Backbone = require('backbone');
 var _        = require('underscore');
 
-var methods = [
-  'add',
-  'at',
-  'findWhere',
-  'get',
-  'parse',
-  'pluck',
-  'pop',
-  'push',
-  'remove',
-  'reset',
-  'shift',
-  'slice',
-  'sort',
-  'toJSON',
-  'unshift',
-  'where'
+var protectedMethods = [
+  'listenTo',
+  'on',
+  'trigger',
+  'clone',
+  'destroy',
+  'initialize',
+  'stopListening',
+  'length',
+  'model',
+  'models'
 ];
 
 function ProxyCollection(attrs, options) {
   attrs = (attrs || {});
   attrs.collection = (attrs.collection || new Backbone.Collection());
-  _.extend(this, attrs);
+  this.collection = attrs.collection;
   this._bindToCollection();
   this._syncWithCollection();
 }
@@ -50,6 +44,7 @@ ProxyCollection.prototype = _.extend({}, Backbone.Events, {
     this.collection = collection;
     this._bindToCollection();
     this._syncWithCollection();
+    this.trigger('collection:change');
   },
 
   _onCollectionEvent: function() {
@@ -66,10 +61,15 @@ ProxyCollection.prototype = _.extend({}, Backbone.Events, {
   _bindToCollection: function() {
     var collection = this.collection;
     var self = this;
-    methods.forEach(function(key){
-      self[key] = null;
-      self[key] = collection[key].bind(collection);
-    });
+
+    for(var key in collection){
+      if(/^_/.test(key)) continue;
+      if(protectedMethods.indexOf(key) != -1) continue;
+      if(_.isFunction(collection[key])) this[key] = collection[key].bind(collection);
+    }
+
+    //avoid multipl bindings
+    this.stopListening(collection, 'all', this._onCollectionEvent, this);
 
     //listen to every event
     this.listenTo(collection, 'all', this._onCollectionEvent, this);

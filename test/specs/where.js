@@ -39,9 +39,6 @@ describe('ProxyCollection.where()', function() {
     proxyCollection.switchCollection(secondaryCollection);
     var result = proxyCollection.where({type: true});
     assert.equal(2, result.length);
-    console.log('-----------------------');
-    console.log(result);
-    console.log('-----------------------');
     assert.equal('e', result[0].get('label'));
     assert.equal('g', result[1].get('label'));
   });
