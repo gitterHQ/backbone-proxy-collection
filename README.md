@@ -17,7 +17,7 @@ var publicCollection  = new ProxyCollection({
 
 Now at any point if you want to switch the collection call:
 
-``js`
+```js
 
 var newCollection = new Backbone.Collection();
 publicCollection.switchCollection(newCollection);
