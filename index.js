@@ -43,11 +43,12 @@ ProxyCollection.prototype = _.extend({}, Backbone.Events, {
     if (!collection) {
       throw new Error('A valid collection must be passed to ProxyCollection.switchCollection');
     }
+    if (this.collection === collection) return;
     this._unbind();
     this.collection = collection;
     this._bindToCollection();
     this._syncWithCollection();
-    this.trigger('collection:change');
+    this.trigger('reset', this, { switched: true });
   },
 
   _onCollectionEvent: function() {

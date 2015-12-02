@@ -13,9 +13,10 @@ beforeEach(function(){
 
 describe('ProxyCollection.trigger()', function(){
 
-  it('Should emit a collection:change event when swicthCollection is called', function(done){
-    proxyCollection.on('collection:change', function(){
-      assert.ok(true);
+  it('Should emit a reset event when swicthCollection is called', function(done){
+    proxyCollection.on('reset', function(collection, options) {
+      assert.strictEqual(collection, proxyCollection);
+      assert.deepEqual(options, { switched: true });
       done();
     });
     proxyCollection.switchCollection(new Backbone.Collection());
