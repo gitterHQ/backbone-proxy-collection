@@ -15,6 +15,7 @@ describe('ProxyCollection methods compared to Backbone.Collection', function() {
       if (/^_/.test(key)) continue;
       if (key === 'modelId') continue;
       if (key === 'collect') continue;
+      if (key === 'initialize') continue;
 
       assert.equal(typeof proxyCollection[key], typeof collection[key], 'Proxy collection should contain a property of ' + key);
     }
