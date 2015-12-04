@@ -24,6 +24,7 @@ beforeEach(function() {
 
   proxyCollection = new ProxyCollection({
     collection: collection,
+    klass: CustomCollection
   });
 });
 
