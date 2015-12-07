@@ -7,6 +7,12 @@ var _        = require('underscore');
 var BackboneCollectionPrototype = Backbone.Collection.prototype;
 var Events = Backbone.Events;
 
+function makeProxyFunction(key) {
+  return function() {
+    return this.collection[key].apply(this.collection, arguments);
+  };
+}
+
 function ProxyCollection(attrs) {
   this.collection = attrs && attrs.collection || new Backbone.Collection();
   this._bindToCollection();
@@ -56,15 +62,15 @@ function ProxyCollection(attrs) {
   // Add any additional methods for this klass
   var klass = attrs && attrs.klass;
   if (klass && klass.prototype) {
-    Object.keys(klass.prototype).forEach(function(key) {
+
+    for (var key in klass.prototype) {
       var entry = klass.prototype[key];
 
       if (allowMethod(key, entry)) {
-        this[key] = function() {
-          return this.collection[key].apply(this.collection, arguments);
-        };
+        this[key] = makeProxyFunction(key);
       }
-    }, this);
+    }
+
   }
 }
 
@@ -110,17 +116,23 @@ ProxyCollection.prototype = _.extend({
 Object.keys(BackboneCollectionPrototype).forEach(function(key) {
   var entry = BackboneCollectionPrototype[key];
   if (allowMethod(key, entry)) {
-    ProxyCollection.prototype[key] = function() {
-      return this.collection[key].apply(this.collection, arguments);
-    };
+    ProxyCollection.prototype[key] = makeProxyFunction(key);
   }
 });
 
 function allowMethod(key, entry) {
   if (key[0] === '_') return;
   if (typeof entry !== 'function') return;
+
+  // Skip Event's methods
   if (Events.hasOwnProperty(key)) return;
+
+  // Skip custom implementations
   if (ProxyCollection.prototype.hasOwnProperty(key)) return;
+
+  // Skip Object
+  if (Object.prototype.hasOwnProperty(key)) return;
+
   if (key === 'constructor' || key === 'initialize' || key === 'comparator') return;
 
   return true;

@@ -6,6 +6,7 @@ var _               = require('underscore');
 var proxyCollection;
 var collection;
 var CustomCollection;
+var EvenMoreCustomCollection;
 
 beforeEach(function() {
 
@@ -20,11 +21,15 @@ beforeEach(function() {
     _privateProp2: 2,
   });
 
+  EvenMoreCustomCollection = CustomCollection.extend({
+    customMethod3: function() {}
+  });
+
   collection = new CustomCollection();
 
   proxyCollection = new ProxyCollection({
     collection: collection,
-    klass: CustomCollection
+    klass: EvenMoreCustomCollection
   });
 });
 
@@ -36,13 +41,9 @@ describe('ProxyCollection should extend a custom collection', function() {
   });
 
   it('Should contain custom methods', function() {
-    assert.ok(_.isFunction(proxyCollection.customMethod1));
-    assert.ok(_.isFunction(proxyCollection.customMethod2));
-  });
-
-  it('Should contain custom props', function() {
-    assert.ok('a', proxyCollection.customProp1);
-    assert.ok(2, proxyCollection.customProp2);
+    assert.ok(_.isFunction(proxyCollection.customMethod1), 'should contain customMethod1');
+    assert.ok(_.isFunction(proxyCollection.customMethod2), 'should contain customMethod2');
+    assert.ok(_.isFunction(proxyCollection.customMethod3), 'should contain customMethod3');
   });
 
 });
