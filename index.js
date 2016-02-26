@@ -13,36 +13,38 @@ function makeProxyFunction(key) {
   };
 }
 
-function ProxyCollection(attrs) {
+function ProxyCollection(attrs, options) {
   this.collection = attrs && attrs.collection || new Backbone.Collection();
   this._bindToCollection();
 
-  Object.defineProperty(this, 'length', {
-    get: function() {
-      return this.collection.length;
-    }
-  });
+  if(!options || !options.dontDefineProps) {
+    Object.defineProperty(this, 'length', {
+      get: function() {
+        return this.collection.length;
+      }
+    });
 
-  Object.defineProperty(this, 'models', {
-    get: function() {
-      return this.collection.models;
-    }
-  });
+    Object.defineProperty(this, 'models', {
+      get: function() {
+        return this.collection.models;
+      }
+    });
 
-  Object.defineProperty(this, 'model', {
-    get: function() {
-      return this.collection.model;
-    }
-  });
+    Object.defineProperty(this, 'model', {
+      get: function() {
+        return this.collection.model;
+      }
+    });
 
-  Object.defineProperty(this, 'comparator', {
-    get: function() {
-      return this.collection.comparator;
-    },
-    set: function(value) {
-      return (this.collection.comparator = value);
-    }
-  });
+    Object.defineProperty(this, 'comparator', {
+      get: function() {
+        return this.collection.comparator;
+      },
+      set: function(value) {
+        return (this.collection.comparator = value);
+      }
+    });
+  }
 
   // Define additional properties
   var additionalProperties = attrs.properties;
